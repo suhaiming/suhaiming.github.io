@@ -30,7 +30,7 @@
 <body>
   <header id="header" class="inner"><div class="alignleft">
   <h1><a href="/">冷露清风</a></h1>
-  <h2><a href="/">幽兰花，为谁好，露冷清风香自老</a></h2>
+  <h2><a href="/">幽兰花，为谁好，露冷风清香自老</a></h2>
 </div>
 <nav id="main-nav" class="alignright">
   <ul>
@@ -63,9 +63,9 @@
         <p>Reference: <a href="https://hexo.io/docs/" target="_blank" rel="external">hexo</a> <a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></p>
 <h2 id="requirememnts">requirememnts</h2><h3 id="Git">Git</h3><p><strong>git installation</strong></p>
 <pre><code>aptitude <span class="keyword">install</span> git
-</code></pre><h3 id="Node-js">Node.js</h3><p><strong>Nvm installation</strong><br> nvm: node version management</p>
+</code></pre><h3 id="Node-js">Node.js</h3><p><strong>nvm installation</strong><br> nvm: node version management</p>
 <pre><code>curl http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span>
-</code></pre><p><strong>configuration</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat .zshrc</span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"/home/shm/.nvm"</span></span><br><span class="line">[ <span class="operator">-s</span> <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="comment"># This loads nvm</span></span><br><span class="line"></span><br><span class="line">nvm use <span class="number">4.1</span>.<span class="number">0</span> &gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+</code></pre><p><strong>nvm configuration</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat .zshrc</span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"/home/shm/.nvm"</span></span><br><span class="line">[ <span class="operator">-s</span> <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="comment"># This loads nvm</span></span><br><span class="line"></span><br><span class="line">nvm use <span class="number">4.1</span>.<span class="number">0</span> &gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>nvm commands</strong></p>
 <pre><code>nvm <span class="built_in">list</span>
 nvm install v4<span class="number">.10</span> <span class="comment">//nvm install stable/unstable</span>
