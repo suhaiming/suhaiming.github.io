@@ -1,66 +1,95 @@
-<!DOCTYPE HTML>
-<html>
+
+ <!DOCTYPE HTML>
+<html lang="English">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>基于 hexo 博客安装配置 | 冷露清风</title>
-  <meta name="author" content="shm">
-  
-  <meta name="description" content="Shm&#39;s blogs.">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="基于 hexo 博客安装配置"/>
-  <meta property="og:site_name" content="冷露清风"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="冷露清风" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
+    <title>基于 hexo 博客安装配置 | 冷露清风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="shm">
+    
+    <meta name="description" content="Reference: hexo nvm
+requirememntsGitgit installation
+aptitude install git
+Node.jsnvm installation nvm: node version management
+curl https://raw.github">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">冷露清风</a></h1>
-  <h2><a href="/">幽兰花，为谁好，露冷风清香自老</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
+  <body>
     <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-09-22T18:46:55.000Z"><a href="/2015/09/23/基于 hexo 博客安装配置/">2015-09-23</a></time>
-      
-      
-  
-    <h1 class="title">基于 hexo 博客安装配置</h1>
-  
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="冷露清风" title="冷露清风"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="冷露清风">冷露清风</a></h1>
+				<h2 class="blog-motto">幽兰花，为谁好，露冷风清香自老</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:imshm.tk">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
 
     </header>
-    <div class="entry">
-      
-        <p>Reference: <a href="https://hexo.io/docs/" target="_blank" rel="external">hexo</a> <a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></p>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/23/基于 hexo 博客安装配置/" title="基于 hexo 博客安装配置" itemprop="url">基于 hexo 博客安装配置</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://imshm.tk" title="shm">shm</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-09-22T18:46:55.000Z" itemprop="datePublished">2015-09-23</time>
+    更新日期:<time datetime="2015-09-22T19:33:52.150Z" itemprop="dateModified">2015-09-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#requirememnts"><span class="toc-number">1.</span> <span class="toc-text">requirememnts</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git"><span class="toc-number">1.1.</span> <span class="toc-text">Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">Node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_install"><span class="toc-number">2.</span> <span class="toc-text">hexo install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_setup"><span class="toc-number">3.</span> <span class="toc-text">hexo setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_configuration"><span class="toc-number">4.</span> <span class="toc-text">hexo configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_commands"><span class="toc-number">5.</span> <span class="toc-text">hexo commands</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_deploy"><span class="toc-number">6.</span> <span class="toc-text">hexo deploy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_themes_configuration"><span class="toc-number">7.</span> <span class="toc-text">hexo themes configuration</span></a></li></ol>
+		</div>
+		
+		<p>Reference: <a href="https://hexo.io/docs/" target="_blank" rel="external">hexo</a> <a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></p>
 <h2 id="requirememnts">requirememnts</h2><h3 id="Git">Git</h3><p><strong>git installation</strong></p>
 <pre><code>aptitude <span class="keyword">install</span> git
 </code></pre><h3 id="Node-js">Node.js</h3><p><strong>nvm installation</strong><br> nvm: node version management</p>
@@ -93,107 +122,195 @@ npm install
 <h2 id="hexo_themes_configuration">hexo themes configuration</h2><pre><code>git clone git<span class="annotation">@github</span>.<span class="string">com:</span>iissnan<span class="regexp">/hexo-theme-next.git themes/</span>next
 git clone <span class="string">git:</span><span class="comment">//github.com/tommy351/hexo-theme-light.git theme/light </span>
 </code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat _config.yml</span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
   
-  <div class="tags">
-    <a href="/tags/hexo/">hexo</a>
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a>
   </div>
 
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://imshm.tk/2015/09/23/基于 hexo 博客安装配置/" data-title="基于 hexo 博客安装配置 | 冷露清风" data-tsina="null" class="share clearfix">
   </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
-      
-      <div class="clearfix"></div>
-    </footer>
+</div>
+</footer>   	       
+	</article>
+	
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#requirememnts"><span class="toc-number">1.</span> <span class="toc-text">requirememnts</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git"><span class="toc-number">1.1.</span> <span class="toc-text">Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">Node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_install"><span class="toc-number">2.</span> <span class="toc-text">hexo install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_setup"><span class="toc-number">3.</span> <span class="toc-text">hexo setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_configuration"><span class="toc-number">4.</span> <span class="toc-text">hexo configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_commands"><span class="toc-number">5.</span> <span class="toc-text">hexo commands</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_deploy"><span class="toc-number">6.</span> <span class="toc-text">hexo deploy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo_themes_configuration"><span class="toc-number">7.</span> <span class="toc-text">hexo themes configuration</span></a></li></ol>
   </div>
-</article>
 
-
-<section id="comment">
-  <h1 class="title">留言</h1>
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
 
   
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
 
-<div class="fb-comments" data-href="http://imshm.tk/2015/09/23/基于 hexo 博客安装配置/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
   
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
-    <input type="hidden" name="q" value="site:imshm.tk">
-  </form>
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+		</ul>
 </div>
 
-  
 
-  
-<div class="widget tag">
-  <h3 class="title">標籤</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
-  
-  </ul>
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
 </div>
 
 </aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2015 shm
-  
 </div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://imshm.tk" target="_blank" title="shm">shm</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
 </script>
 
-</body>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
 </html>
