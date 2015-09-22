@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo installation | 冷露清风</title>
+  <meta name="author" content="shm">
+  
+  <meta name="description" content="Shm&#39;s blogs.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Hexo installation"/>
+  <meta property="og:site_name" content="冷露清风"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="冷露清风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">冷露清风</a></h1>
+  <h2><a href="/">幽兰花，为谁好，露冷清风香自老</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-09-22T18:46:55.000Z"><a href="/2015/09/23/Hexo-installation/">2015-09-23</a></time>
+      
+      
+  
+    <h1 class="title">Hexo installation</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>hexo installation:<br><a href="https://hexo.io/docs/" target="_blank" rel="external">https://hexo.io/docs/</a></p>
+<p>requirememnts</p>
+<ol>
+<li>Node.js</li>
+<li>Git</li>
+</ol>
+<p>curl <a href="https://raw.github.com/creationix/nvm/master/install.sh" target="_blank" rel="external">https://raw.github.com/creationix/nvm/master/install.sh</a> | sh<br>aptitude install git</p>
+<p>nvm: node version management<br><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat .zshrc</span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"/home/shm/.nvm"</span></span><br><span class="line">[ <span class="operator">-s</span> <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="comment"># This loads nvm</span></span><br><span class="line"></span><br><span class="line">nvm use <span class="number">4.1</span>.<span class="number">0</span> &gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>nvm list<br>nvm install v4.10 //nvm install stable/unstable<br>nvm user 4.10 //nvm use stable/unstable<br>nvm current</p>
+<p>install hexo<br>npm install -g hexo-cli</p>
+<p>hexo setup<br>hexo init <folder><br>cd  <folder><br>npm install</folder></folder></p>
+<p>hexo configuration<br>// modify _config.yml<br>avaliable config:<br>site<br>url<br>directory<br>writing<br>catagory &amp; tag<br>date / time format<br>pagination<br>extensions</p>
+<p>command<br>  clean     Removed generated files and cache.<br>  config    Get or set configurations.<br>  deploy    Deploy your website.<br>  generate  Generate static files.<br>  help      Get help on a command.<br>  init      Create a new Hexo folder.<br>  list      List the information of the site<br>  migrate   Migrate your site from other system to Hexo.<br>  new       Create a new post.<br>  publish   Moves a draft post from _drafts to _posts folder.<br>  render    Render files with renderer plugins.<br>  server    Start the server.<br>  version   Display version information.</p>
+<p>Global Options:<br>  –config  Specify config file instead of using _config.yml<br>  –cwd     Specify the CWD<br>  –debug   Display all verbose messages in the terminal<br>  –draft   Display draft posts<br>  –safe    Disable all plugins and scripts<br>  –silent  Hide output on console</p>
+<p>deploy<br>npm install hexo-deployer-git –save<br>cat _config.yml<br>deploy:<br>  type: git<br>  repository: git@github.com:suhaiming/suhaiming.github.io.git<br>  branch: master</p>
+<p>themes<br>git clone git@github.com:iissnan/hexo-theme-next.git themes/next<br>git clone git://github.com/tommy351/hexo-theme-light.git theme/light<br>cat _config.yml<br>theme: light</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://imshm.tk/2015/09/23/Hexo-installation/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:imshm.tk">
+  </form>
+</div>
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 shm
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
