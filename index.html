@@ -53,6 +53,47 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-09-24T12:59:51.000Z"><a href="/2015/09/24/通过-IP-查找服务器/">2015-09-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/09/24/通过-IP-查找服务器/">通过 IP 查找服务器</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Reference: </p>
+<p>需要重启一台服务器，服务器能 ping 通，但无法远程。一时找不到该服务器的记录，可通过如下步骤获得服务器的信息</p>
+<ol>
+<li>通过 nmap -T4 -A <ipaddr> 扫描服务器开放的服务和得到可能的操作系统。</ipaddr></li>
+<li>同网段ping ip，然后通过 arp -a 得到 IP 的 MAC</li>
+<li>网上查找 <a href="http://www.macvendorlookup.com/" target="_blank" rel="external">MAC</a> 对应厂商，确认机器类型，品牌</li>
+<li>通过交换机查找 arp 记录得到该 MAC 对应的交换机端口，如是物理机，即可得到位置，如果是桥接网络的虚拟机，执行下一步</li>
+<li>通过交换机查找 arp 记录得到该交换机端口对应的所有 IP, 从中找到虚拟机的宿主机</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-09-24T12:36:11.000Z"><a href="/2015/09/24/服务器故障处理分析/">2015-09-24</a></time>
       
       
@@ -273,6 +314,8 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
   
     <li><a href="/categories/tech/">tech</a><small>3</small></li>
   
+    <li><a href="/categories/work/">work</a><small>1</small></li>
+  
   </ul>
 </div>
 
@@ -281,7 +324,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tagcloud">
   <h3 class="title">標籤雲</h3>
   <div class="entry">
-    <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 10px;">iis</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a>
+    <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 10px;">iis</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/server/" style="font-size: 10px;">server</a>
   </div>
 </div>
 
@@ -290,6 +333,10 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tag">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2015/09/24/通过-IP-查找服务器/">通过 IP 查找服务器</a>
+      </li>
     
       <li>
         <a href="/2015/09/24/服务器故障处理分析/">服务器故障处理</a>
