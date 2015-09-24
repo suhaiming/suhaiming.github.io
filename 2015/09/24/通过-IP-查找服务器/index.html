@@ -66,8 +66,8 @@
 <p>需要重启一台服务器，服务器能 ping 通，但无法远程。一时找不到该服务器的记录，可通过如下步骤获得服务器的信息</p>
 <ol>
 <li>通过 nmap -T4 -A <ipaddr> 扫描服务器开放的服务和得到可能的操作系统。</ipaddr></li>
-<li>同网段ping ip，然后通过 arp -a 得到 IP 的 MAC</li>
-<li>网上查找 <a href="http://www.macvendorlookup.com/" target="_blank" rel="external">MAC</a> 对应厂商，确认机器类型，品牌</li>
+<li>同网段 ping ip，然后通过 arp -a 得到 IP 的 MAC</li>
+<li>网上查找 <a href="http://www.macvendorlookup.com/" target="_blank" rel="external">MAC 对应厂商</a> ，确认机器类型，品牌</li>
 <li>通过交换机查找 arp 记录得到该 MAC 对应的交换机端口，如是物理机，即可得到位置，如果是桥接网络的虚拟机，执行下一步</li>
 <li>通过交换机查找 arp 记录得到该交换机端口对应的所有 IP, 从中找到虚拟机的宿主机</li>
 </ol>
