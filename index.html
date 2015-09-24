@@ -53,6 +53,72 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-09-24T12:36:11.000Z"><a href="/2015/09/24/服务器故障处理分析/">2015-09-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/09/24/服务器故障处理分析/">服务器故障处理分析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Reference: </p>
+<h2 id="检查服务器情况">检查服务器情况</h2><ul>
+<li>系统 CPU/Memory/Process 使用</li>
+<li>sockets 连接数</li>
+<li>检查应用程序池</li>
+<li>检查网站正在处理请求</li>
+<li>检查系统日志</li>
+<li>检查虚拟机 CPU/Memory/Network 统计情况</li>
+</ul>
+<h2 id="分析访问日志">分析访问日志</h2><h3 id="Linux_分析脚本">Linux 分析脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 统计客户端 IP:</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;++sum[$9]&#125;END&#123;for (i in sum)print i,sum[i]&#125;'|sort -n -r -k 2 |head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计 http_code</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;++sum[$11]&#125;END&#123;for (i in sum)print i,sum[i]&#125;'|sort -n -r -k 2 |head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计 User-agent</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;++sum[$10]&#125;END&#123;for (i in sum)print i,sum[i]&#125;'|sort -n -r -k 2 |head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计请求(cs-uri-stem)</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;++sum[$5]&#125;END&#123;for (i in sum)print i,sum[i]&#125;'|sort -n -r -k 2 |head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计请求(cs-uri-query)</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;++sum[$6]&#125;END&#123;for (i in sum)print i,sum[i]&#125;'|sort -n -r -k 2 |head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间花费最多的请求</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;if ($NF &gt; 300)&#123;print $5,$NF&#125;&#125;'|sort -n -r -k 2 | head</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 平均每个请求时间</span></span><br><span class="line">grep -v ^<span class="comment"># $logfile| awk '&#123;if ($NF &gt; 300)&#123;++sum[$5];time[$5]+=$NF&#125;&#125;END&#123;for(i in sum) print i,sum[i],time[i]/sum[i]&#125;'|sort -n -r -k 2|head</span></span><br></pre></td></tr></table></figure>
+<h3 id="IIS_Log_Parser_分析">IIS Log Parser 分析</h3><p>IIS Log Parser 是微软的日志分析工具可直接使用 sql 查询统计日志，较为方便，同时有对应的图形化工具 IIS Log Parser Studio，Log Parser Studio 依赖于Log Parser，内包含了常用的查询，使用起来更方便些。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先设置日志路径，可使用 * 匹配多个日志</span></span><br><span class="line"><span class="built_in">set</span> logfile=E:\information\shm\iislog\u_ex150924.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计客户端 IP:</span></span><br><span class="line">logparser -i:iisw3c <span class="string">"select c-ip,count(1) as sum from %logfile% group by c-ip order by count(1) desc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计 http_code</span></span><br><span class="line">logparser -i:iisw3c <span class="string">"select sc-status,count(1) as sum from %logfile% group by sc-status"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计 User-agent</span></span><br><span class="line">logparser -i:iisw3c <span class="string">"select cs(User-Agent),count(1) as sum from %logfile% group by cs(User-Agent) order by count(1) desc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计用户请求 cs-uri-stem</span></span><br><span class="line">logparser -i:iisw3c <span class="string">"select cs-uri-stem,count(1) as sum from %logfile% group by cs-uri-stem order by count(1) desc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># win32 status 统计</span></span><br><span class="line">logparser -i:iisw3c </span><br><span class="line"><span class="string">"SELECT  </span><br><span class="line">    sc-win32-status As Win32-Status, </span><br><span class="line">    COUNT(*) AS Hits,  </span><br><span class="line">    WIN32_ERROR_DESCRIPTION(sc-win32-status) as Description</span><br><span class="line">    FROM %logfile%  </span><br><span class="line">WHERE Win32-Status&lt;&gt;0  </span><br><span class="line">GROUP BY Win32-Status  </span><br><span class="line">ORDER BY Hits DESC"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询次数多，耗时长请求</span></span><br><span class="line">logparser -i:iisw3c <span class="string">"select cs-uri-stem,max(time-taken) as maxtime,avg(time-taken) as avgtime,min(time-taken) as mintime,count(1) as count from %logfile% where time-taken&gt;30 group by cs-uri-stem order by count(1),avg(time-taken) desc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按请求大小排序</span></span><br><span class="line">logparser -i:iisw3c <span class="string">"select cs-uri-stem,max(sc-bytes) as maxsize,avg(sc-bytes) as avgsize,min(sc-bytes) as minsize,count(1) as count from %logfile% group by cs-uri-stem order by avg(sc-bytes) desc"</span></span><br></pre></td></tr></table></figure>
+<h3 id="IIS_log_Fields">IIS log Fields</h3><pre><code>date：发出请求时候的日期。
+time：发出请求时候的时间。注意：默认情况下这个时间是格林威治时间，比我们的北京时间晚8个小时，下面有说明。
+c-ip：客户端IP地址。
+<span class="keyword">cs</span>-username：用户名，访问服务器的已经过验证用户的名称，匿名用户用连接符-表示。
+s-sitename：服务名，记录当记录事件运行于客户端上的Internet服务的名称和实例的编号。
+s-computername：服务器的名称。
+s-ip：服务器的IP地址。
+s-port：为服务配置的服务器端口号。
+<span class="keyword">cs</span>-method：请求中使用的HTTP方法，GET/<span class="keyword">POST</span>。
+<span class="keyword">cs</span>-uri-<span class="keyword">stem</span>：URI资源，记录做为操作目标的统一资源标识符（URI），即访问的页面文件。   
+<span class="keyword">cs</span>-uri-<span class="keyword">query</span>：URI查询，记录客户尝试执行的查询，只有动态页面需要URI查询，如果有则记录，没有则以连接符-表示。即访问网址的附带参数。   
+<span class="keyword">sc</span>-status：协议状态，记录HTTP状态代码，200表示成功，403表示没有权限，404表示找不到该页面，具体说明在下面。
+<span class="keyword">sc</span>-substatus：协议子状态，记录HTTP子状态代码。   
+<span class="keyword">sc</span>-win32-status：Win32状态，记录Windows状态代码。   
+<span class="keyword">sc</span>-bytes：服务器发送的字节数。   
+<span class="keyword">cs</span>-bytes：服务器接受的字节数。   
+time-taken：记录操作所花费的时间，单位是毫秒。   
+<span class="keyword">cs</span>-<span class="keyword">version</span>：记录客户端使用的协议版本，HTTP或者FTP。   
+<span class="keyword">cs</span>-host:记录主机头名称，没有的话以连接符-表示。注意：为网站配置的主机名可能会以不同的方式出现在日志文件中，原因是HTTP.sys使用Punycode编码格式来记录主机名。  
+<span class="keyword">cs</span>(User-Agent)：用户代理，客户端浏览器、操作系统等情况。   
+<span class="keyword">cs</span>(Cookie)：记录发送或者接受的Cookies内容，没有的话则以连接符-表示。   
+<span class="keyword">cs</span>(Referer)：引用站点，即访问来源。
+</code></pre>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-09-23T19:31:29.000Z"><a href="/2015/09/24/Git-学习笔记/">2015-09-24</a></time>
       
       
@@ -206,7 +272,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
   <h3 class="title">分類</h3>
   <ul class="entry">
   
-    <li><a href="/categories/tech/">tech</a><small>2</small></li>
+    <li><a href="/categories/tech/">tech</a><small>3</small></li>
   
   </ul>
 </div>
@@ -216,7 +282,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tagcloud">
   <h3 class="title">標籤雲</h3>
   <div class="entry">
-    <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+    <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis-log-parser/" style="font-size: 10px;">iis, log parser</a>
   </div>
 </div>
 
@@ -225,6 +291,10 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tag">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2015/09/24/服务器故障处理分析/">服务器故障处理分析</a>
+      </li>
     
       <li>
         <a href="/2015/09/24/Git-学习笔记/">Git 学习笔记</a>
