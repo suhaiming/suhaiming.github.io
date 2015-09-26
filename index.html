@@ -104,22 +104,23 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /images/ &#123;</span><br><span class="line">     valid_referers none blocked mysite.com *.mysite.com;</span><br><span class="line">     <span class="keyword">if</span> (<span class="variable">$invalid_referer</span>) &#123;</span><br><span class="line">        <span class="built_in">return</span>   <span class="number">403</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <ul>
-<li>none - Matches the requests with no Referrer header.<sup>[1]</sup>  </li>
-<li>blocked - Matches the requests with blocked Referrer  header.  <sup>[1]</sup></li>
-<li><em>.mydomain.com - Matches all the sub domains of mydomain.com. Since v0.5.33, </em> wildcards can be used in the server names.<sup>[1]</sup></li>
+<li>none - Matches the requests with no Referrer header.</li>
+<li>blocked - Matches the requests with blocked Referrer  header.</li>
+<li><em>.mydomain.com - Matches all the sub domains of mydomain.com. Since v0.5.33, </em> wildcards can be used in the server names.</li>
 </ul>
 </blockquote>
-<h2 id="Blocked_referrer"><font color="blue"><strong>Blocked referrer</strong> </font></h2><ol>
+<h2 id="Blocked_Referer"><font color="blue"><strong>Blocked Referer</strong> </font></h2><ol>
 <li>Type “about:config” </li>
 <li>type “referer”, check network.http.sendRefererHeader. This is probably set to 2.</li>
 <li>modify network.http.sendRefererHeader to 0, or 1.</li>
 </ol>
 <blockquote>
-<p>Setting sendRefererHeader to 0, This completely disables the referer header. This is normally what you want, though it may occasionally break a few sites that check the referer header to prevent deep linking or framing of its content. (It breaks WordPress, for example.)<sup>[2]</sup></p>
-<p>Setting sendRefererHeader to 1 sends a referer header when following a link to another page, but not when loading images on the page. This will block most cross-site cookie tracking, but still allow WordPress and most other sites that depend on referers to function. <sup>[2]</sup></p>
+<p>Setting sendRefererHeader to 0, This completely disables the referer header. This is normally what you want, though it may occasionally break a few sites that check the referer header to prevent deep linking or framing of its content. (It breaks WordPress, for example.)</p>
+<p>Setting sendRefererHeader to 1 sends a referer header when following a link to another page, but not when loading images on the page. This will block most cross-site cookie tracking, but still allow WordPress and most other sites that depend on referers to function. </p>
 <p>Setting sendRefererHeader to 2 (the default) sends it when following links and when loading images on the page.</p>
-<p>There’s also a boolean, network.http.sendSecureXSiteReferer preference. If true, referer headers are sent for https the same as they are for http (i.e. controlled by network.http.sendRefererHeader). If false, referer headers are not sent for https connections. The default is true, and that’s probably OK.<sup>[2]</sup></p>
+<p>There’s also a boolean, network.http.sendSecureXSiteReferer preference. If true, referer headers are sent for https the same as they are for http (i.e. controlled by network.http.sendRefererHeader). If false, referer headers are not sent for https connections. The default is true, and that’s probably OK.</p>
 </blockquote>
+<p>test<sup>[1]</sup></p>
 <p>Reference:<br>&ensp;&ensp;[1] <a href="http://nginxlibrary.com/hotlink-protection/" target="_blank" rel="external">http://nginxlibrary.com/hotlink-protection/</a><br>&ensp;&ensp;[2] <a href="http://cafe.elharo.com/privacy/privacy-tip-3-block-referer-headers-in-firefox/" target="_blank" rel="external">http://cafe.elharo.com/privacy/privacy-tip-3-block-referer-headers-in-firefox/</a></p>
 
       
