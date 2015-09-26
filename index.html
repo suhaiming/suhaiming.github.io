@@ -63,9 +63,9 @@
     </header>
     <div class="entry">
       
-        <h2 id="修改_root_用户名">修改 root 用户名</h2><p>将 /etc/passwd 与 /etc/shadow 第一列的 root 改为想要我管理员名称</p>
+        <h2 id="修改_root_用户名">修改 root 用户名</h2><p>将 /etc/passwd 与 /etc/shadow 第一列的 root 改为想要的管理员名称</p>
 <h2 id="禁用_root_密码登录">禁用 root 密码登录</h2><p>修改 /etc/ssh/sshd_config ：<br>PermitRootLogin without-password</p>
-<h2 id="配置_ssh_密钥登录">配置 ssh 密钥登录</h2><p><strong>方法一：</strong>服务器端.ssh/authorized_keys 文件添加客户端的公钥，配置文件权限为644<br><strong>方法二：</strong>客户端指定使用服务器端的私钥登录,务必保存好私</p>
+<h2 id="配置_ssh_密钥登录">配置 ssh 密钥登录</h2><p><strong>方法一：</strong>服务器端.ssh/authorized_keys 文件添加客户端的公钥，配置文件权限为644<br><strong>方法二：</strong>客户端指定使用服务器端的私钥登录,务必保存好私钥</p>
 <h2 id="禁用其它用户_sudo_切换到_root">禁用其它用户 sudo 切换到 root</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># visudo 注释掉下面内容</span></span><br><span class="line"><span class="comment"># Allow members of group sudo to execute any command</span></span><br><span class="line"><span class="comment"># %sudo   ALL=(ALL:ALL) ALL</span></span><br><span class="line"><span class="comment"># shm     ALL=(ALL:ALL) NOPASSWD:ALL</span></span><br></pre></td></tr></table></figure>
 <h2 id="ssh_三个信息级别：">ssh 三个信息级别：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -v</span><br><span class="line">ssh -vv</span><br><span class="line">ssh -vvv</span><br></pre></td></tr></table></figure>
 
