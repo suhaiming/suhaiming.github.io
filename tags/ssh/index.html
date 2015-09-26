@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>通过 IP 查找服务器 | 冷露清风</title>
+  <title>ssh | 冷露清风</title>
   <meta name="author" content="shm">
   
   <meta name="description" content="Another hexo blog">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="通过 IP 查找服务器"/>
+  
   <meta property="og:site_name" content="冷露清风"/>
 
   
@@ -46,62 +46,25 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-09-24T12:59:51.000Z"><a href="/2015/09/24/lookup-server-information-by-ip-address/">2015-09-24</a></time>
-      
-      
-  
-    <h1 class="title">通过 IP 查找服务器</h1>
-  
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">ssh</h2>
 
-    </header>
-    <div class="entry">
-      
-        <p>Reference: </p>
-<p>需要重启一台服务器，服务器能 ping 通，但无法远程。一时找不到该服务器的记录，可通过如下步骤获得服务器的信息</p>
-<ol>
-<li>通过 nmap -T4 -A <ipaddr> 扫描服务器开放的服务和得到可能的操作系统。</ipaddr></li>
-<li>同网段 ping ip，然后通过 arp -a 得到 IP 的 MAC</li>
-<li>网上查找 <a href="http://www.macvendorlookup.com/" target="_blank" rel="external">MAC 对应厂商</a> ，确认机器类型，品牌</li>
-<li>通过交换机查找 arp 记录得到该 MAC 对应的交换机端口，如是物理机，即可得到位置，如果是桥接网络的虚拟机，执行下一步</li>
-<li>通过交换机查找 arp 记录得到该交换机端口对应的所有 IP, 从中找到虚拟机的宿主机</li>
-</ol>
 
-      
-    </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/work/">work</a>
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2015-09-26T04:37:38.000Z"><a href="/2015/09/26/security-configuration-for-linux-root-user/">2015-09-26</a></time>
+            
+              <h1 class="title"><a href="/2015/09/26/security-configuration-for-linux-root-user/">security configuration for linux root user</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
   </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/server/">server</a>
-  </div>
-
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">留言</h1>
-
-  
-</section>
-
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">

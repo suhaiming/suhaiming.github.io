@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>通过 IP 查找服务器 | 冷露清风</title>
+  <title>security configuration for linux root user | 冷露清风</title>
   <meta name="author" content="shm">
   
   <meta name="description" content="Another hexo blog">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="通过 IP 查找服务器"/>
+  <meta property="og:title" content="security configuration for linux root user"/>
   <meta property="og:site_name" content="冷露清风"/>
 
   
@@ -52,25 +52,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-09-24T12:59:51.000Z"><a href="/2015/09/24/lookup-server-information-by-ip-address/">2015-09-24</a></time>
+        <time datetime="2015-09-26T04:37:38.000Z"><a href="/2015/09/26/security-configuration-for-linux-root-user/">2015-09-26</a></time>
       
       
   
-    <h1 class="title">通过 IP 查找服务器</h1>
+    <h1 class="title">security configuration for linux root user</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Reference: </p>
-<p>需要重启一台服务器，服务器能 ping 通，但无法远程。一时找不到该服务器的记录，可通过如下步骤获得服务器的信息</p>
-<ol>
-<li>通过 nmap -T4 -A <ipaddr> 扫描服务器开放的服务和得到可能的操作系统。</ipaddr></li>
-<li>同网段 ping ip，然后通过 arp -a 得到 IP 的 MAC</li>
-<li>网上查找 <a href="http://www.macvendorlookup.com/" target="_blank" rel="external">MAC 对应厂商</a> ，确认机器类型，品牌</li>
-<li>通过交换机查找 arp 记录得到该 MAC 对应的交换机端口，如是物理机，即可得到位置，如果是桥接网络的虚拟机，执行下一步</li>
-<li>通过交换机查找 arp 记录得到该交换机端口对应的所有 IP, 从中找到虚拟机的宿主机</li>
-</ol>
+        <h2 id="修改_root_用户名">修改 root 用户名</h2><p>将 /etc/passwd 与 /etc/shadow 第一列的 root 改为想要我管理员名称</p>
+<h2 id="禁用_root_密码登录">禁用 root 密码登录</h2><p>修改 /etc/ssh/sshd_config ：<br>PermitRootLogin without-password</p>
+<h2 id="配置_ssh_密钥登录">配置 ssh 密钥登录</h2><p><strong>方法一：</strong>服务器端.ssh/authorized_keys 文件添加客户端的公钥，配置文件权限为644<br><strong>方法二：</strong>客户端指定使用服务器端的私钥登录,务必保存好私</p>
+<h2 id="禁用其它用户_sudo_切换到_root">禁用其它用户 sudo 切换到 root</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># visudo 注释掉下面内容</span></span><br><span class="line"><span class="comment"># Allow members of group sudo to execute any command</span></span><br><span class="line"><span class="comment"># %sudo   ALL=(ALL:ALL) ALL</span></span><br><span class="line"><span class="comment"># shm     ALL=(ALL:ALL) NOPASSWD:ALL</span></span><br></pre></td></tr></table></figure>
+<h2 id="ssh_三个信息级别：">ssh 三个信息级别：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -v</span><br><span class="line">ssh -vv</span><br><span class="line">ssh -vvv</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -79,13 +75,13 @@
         
   
   <div class="categories">
-    <a href="/categories/work/">work</a>
+    <a href="/categories/tech/">tech</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/server/">server</a>
+    <a href="/tags/linux/">linux</a>, <a href="/tags/ssh/">ssh</a>
   </div>
 
         
