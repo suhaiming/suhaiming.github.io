@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 硬件监控 | 冷露清风</title>
+  <meta name="author" content="shm">
+  
+  <meta name="description" content="Another hexo blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Linux 硬件监控"/>
+  <meta property="og:site_name" content="冷露清风"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="冷露清风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">冷露清风</a></h1>
+  <h2><a href="/">幽兰花，为谁好，露冷风清香自老</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-09-29T00:34:07.000Z"><a href="/2015/09/29/hardware-monitor-for-linux/">2015-09-29</a></time>
+      
+      
+  
+    <h1 class="title">Linux 硬件监控</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="使用_lshw_列出硬盘信息">使用 lshw 列出硬盘信息</h2><p>sudo aptitude install lshw<br>sudo lshw<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">➜  ~  sudo lshw -short</span><br><span class="line">H/W path         Device      Class       Description</span><br><span class="line">====================================================</span><br><span class="line">                             system      <span class="number">20005</span> (Lenovo)</span><br><span class="line">/<span class="number">0</span>                           bus         JITR1</span><br><span class="line">/<span class="number">0</span>/<span class="number">0</span>                         memory      <span class="number">105</span>KiB BIOS</span><br><span class="line">/<span class="number">0</span>/<span class="number">4</span>                         processor   Pentium(R) Dual-Core CPU       T4200  @ <span class="number">2.00</span>GHz</span><br><span class="line">/<span class="number">0</span>/<span class="number">4</span>/<span class="number">5</span>                       memory      <span class="number">64</span>KiB L1 cache</span><br><span class="line">/<span class="number">0</span>/<span class="number">4</span>/<span class="number">6</span>                       memory      <span class="number">1</span>MiB L2 cache</span><br><span class="line">/<span class="number">0</span>/d                         memory      <span class="number">3</span>GiB System Memory</span><br><span class="line">/<span class="number">0</span>/d/<span class="number">0</span>                       memory      <span class="number">1</span>GiB SODIMM DDR2 Synchronous <span class="number">667</span> MHz (<span class="number">1.5</span> ns)</span><br><span class="line">/<span class="number">0</span>/d/<span class="number">1</span>                       memory      <span class="number">2</span>GiB SODIMM DDR2 Synchronous <span class="number">667</span> MHz (<span class="number">1.5</span> ns)</span><br><span class="line"> ...</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用_lsusb_列出_usb_设备">使用 lsusb 列出 usb 设备</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  script git:(master) ✗ dpkg -S /usr/bin/lsusb <span class="preprocessor">## 查看命令属于那个包</span></span><br><span class="line">usbutils: /usr/bin/lsusb　</span><br><span class="line">➜  script git:(master) ✗ lsusb</span><br><span class="line">\Bus <span class="number">001</span> Device <span class="number">001</span>: ID <span class="number">1</span>d6b:<span class="number">0002</span> Linux Foundation <span class="number">2.0</span> root hub</span><br><span class="line">Bus <span class="number">002</span> Device <span class="number">001</span>: ID <span class="number">1</span>d6b:<span class="number">0002</span> Linux Foundation <span class="number">2.0</span> root hub</span><br><span class="line">Bus <span class="number">003</span> Device <span class="number">001</span>: ID <span class="number">1</span>d6b:<span class="number">0001</span> Linux Foundation <span class="number">1.1</span> root hub</span><br><span class="line">Bus <span class="number">004</span> Device <span class="number">001</span>: ID <span class="number">1</span>d6b:<span class="number">0001</span> Linux Foundation <span class="number">1.1</span> root hub</span><br></pre></td></tr></table></figure>
+<h2 id="hddtemp_硬盘温度监控">hddtemp 硬盘温度监控</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo aptitude install hddtemp</span><br><span class="line">root@shm-debian:~<span class="comment"># hddtemp SATA:/dev/sda</span></span><br><span class="line">/dev/sda: WDC WD2500BEVT-<span class="number">22</span>ZCT0: <span class="number">50</span>°C</span><br></pre></td></tr></table></figure>
+<h2 id="smartmontools_硬盘监控">smartmontools 硬盘监控</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo aptitude install  smartmontools</span><br><span class="line">sudo smartctl <span class="operator">-a</span> /dev/sg0</span><br></pre></td></tr></table></figure>
+<h2 id="使用lm-sensors_读取_temperature/voltage/fan_speed">使用lm-sensors 读取 temperature/voltage/fan speed</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo aptitude install lm-sensors </span><br><span class="line">sudo sensors-detect</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一路YES后，load module</span></span><br><span class="line">/etc/init.d/kmod start</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">sudo modprobe coretemp</span><br><span class="line"></span><br><span class="line">root@shm-debian:~<span class="comment"># sensors</span></span><br><span class="line">acpitz-virtual-<span class="number">0</span></span><br><span class="line">Adapter: Virtual device</span><br><span class="line">temp1:        +<span class="number">57.0</span>°C  (crit = +<span class="number">119.0</span>°C)</span><br><span class="line"></span><br><span class="line">coretemp-isa-<span class="number">0000</span></span><br><span class="line">Adapter: ISA adapter</span><br><span class="line">Core <span class="number">0</span>:       +<span class="number">55.0</span>°C  (high = +<span class="number">105.0</span>°C, crit = +<span class="number">105.0</span>°C)</span><br><span class="line">Core <span class="number">1</span>:       +<span class="number">54.0</span>°C  (high = +<span class="number">105.0</span>°C, crit = +<span class="number">105.0</span>°C)</span><br></pre></td></tr></table></figure>
+<h2 id="图形化工具">图形化工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo aptitude install hardinfo</span><br><span class="line">hardinfo <span class="comment"># GUI Tool for Displays system information</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/tech/">tech</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/hardware/">hardware</a>, <a href="/tags/linux/">linux</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:imshm.tk">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/tech/">tech</a><small>6</small></li>
+  
+    <li><a href="/categories/work/">work</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hardware/" style="font-size: 10px;">hardware</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 10px;">iis</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/09/29/hardware-monitor-for-linux/">Linux 硬件监控</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/26/security-configuration-for-linux-root-user/">Root 安全配置</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/26/hotlink-protection-in-nginx/">Nginx 防盗链设置</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/24/lookup-server-information-by-ip-address/">通过 IP 查找服务器</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/24/how-to-deal-with-server-fault/">服务器故障处理及日志分析</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 shm
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+</body>
+</html>

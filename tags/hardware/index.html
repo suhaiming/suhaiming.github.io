@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Root 安全配置 | 冷露清风</title>
+  <title>hardware | 冷露清风</title>
   <meta name="author" content="shm">
   
   <meta name="description" content="Another hexo blog">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Root 安全配置"/>
+  
   <meta property="og:site_name" content="冷露清风"/>
 
   
@@ -46,58 +46,25 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-09-26T04:37:38.000Z"><a href="/2015/09/26/security-configuration-for-linux-root-user/">2015-09-26</a></time>
-      
-      
-  
-    <h1 class="title">Root 安全配置</h1>
-  
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">hardware</h2>
 
-    </header>
-    <div class="entry">
-      
-        <h2 id="修改_root_用户名">修改 root 用户名</h2><p>将 /etc/passwd 与 /etc/shadow 第一列的 root 改为想要的管理员名称</p>
-<h2 id="禁用_root_密码登录">禁用 root 密码登录</h2><p>修改 /etc/ssh/sshd_config ：<br>PermitRootLogin without-password</p>
-<h2 id="配置_ssh_密钥登录">配置 ssh 密钥登录</h2><p><strong>方法一：</strong>服务器端.ssh/authorized_keys 文件添加客户端的公钥，配置文件权限为644<br><strong>方法二：</strong>客户端指定使用服务器端的私钥登录,务必保存好私钥</p>
-<h2 id="禁用其它用户_sudo_切换到_root">禁用其它用户 sudo 切换到 root</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># visudo 注释掉下面内容</span></span><br><span class="line"><span class="comment"># Allow members of group sudo to execute any command</span></span><br><span class="line"><span class="comment"># %sudo   ALL=(ALL:ALL) ALL</span></span><br><span class="line"><span class="comment"># shm     ALL=(ALL:ALL) NOPASSWD:ALL</span></span><br></pre></td></tr></table></figure>
-<h2 id="ssh_三个信息级别：">ssh 三个信息级别：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -v</span><br><span class="line">ssh -vv</span><br><span class="line">ssh -vvv</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/tech/">tech</a>
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2015-09-29T00:34:07.000Z"><a href="/2015/09/29/hardware-monitor-for-linux/">2015-09-29</a></time>
+            
+              <h1 class="title"><a href="/2015/09/29/hardware-monitor-for-linux/">Linux 硬件监控</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
   </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/linux/">linux</a>, <a href="/tags/ssh/">ssh</a>
-  </div>
-
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-</section>
-
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
