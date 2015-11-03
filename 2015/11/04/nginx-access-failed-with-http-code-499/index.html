@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Nginx 访问失败之 http_code 499 | 冷露清风</title>
+  <meta name="author" content="shm">
+  
+  <meta name="description" content="Another hexo blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Nginx 访问失败之 http_code 499"/>
+  <meta property="og:site_name" content="冷露清风"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="冷露清风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">冷露清风</a></h1>
+  <h2><a href="/">幽兰花，为谁好，露冷风清香自老</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-03T17:40:47.000Z"><a href="/2015/11/04/nginx-access-failed-with-http-code-499/">2015-11-04</a></time>
+      
+      
+  
+    <h1 class="title">Nginx 访问失败之 http_code 499</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="检查日志">检查日志</h2><pre><code>查看访问日志
+查看错误日志
+查看后端服务器日志，如 php 等
+</code></pre><h2 id="strace_跟踪系统调用">strace 跟踪系统调用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追踪进程</span></span><br><span class="line">➜  ~  pidof nginx</span><br><span class="line"><span class="number">955</span> <span class="number">954</span> <span class="number">953</span> <span class="number">952</span> <span class="number">951</span></span><br><span class="line">sudo strace -Ttt <span class="operator">-e</span> trace=all -p <span class="number">951</span>,<span class="number">952</span>,<span class="number">953</span>,<span class="number">954</span>,<span class="number">955</span></span><br><span class="line"><span class="comment"># or modify .bashrc add brew function</span></span><br><span class="line"><span class="keyword">function</span> straceall &#123;</span><br><span class="line">    strace $(pidof <span class="string">"<span class="variable">$1</span>"</span>|sed -r <span class="string">'s/([0-9]*)/-p \1/g'</span>)</span><br><span class="line">&#125;</span><br><span class="line">sources .bashrc</span><br><span class="line">straceall nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># trace WEB</span></span><br><span class="line">strace <span class="operator">-f</span> -F <span class="operator">-s</span> <span class="number">1024</span> -o nginx-strace /usr/<span class="built_in">local</span>/nginx/sbin/nginx -c /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line">strace <span class="operator">-f</span> -F -o php-fpm-strace /usr/<span class="built_in">local</span>/php/sbin/php-fpm -y /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># trace Mysql</span></span><br><span class="line">strace <span class="operator">-f</span> -F -ff -o mysqld-strace <span class="operator">-s</span> <span class="number">1024</span> -p mysql_pid</span><br><span class="line">find ./ -name <span class="string">"mysqld-strace*"</span> -type f -print |xargs grep -n <span class="string">"SELECT.*FROM"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># trace PHP</span></span><br><span class="line">➜  ~  cat test.php </span><br><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$val</span> = <span class="built_in">exec</span>(<span class="string">"curl -I www.facebook.com"</span>,<span class="variable">$out</span>,<span class="variable">$status</span>);</span><br><span class="line"><span class="comment"># print_r($out);</span></span><br><span class="line">// <span class="built_in">print</span>_r(<span class="variable">$status</span>);</span><br><span class="line">?&gt;</span><br><span class="line">➜  ~  strace php test.php</span><br></pre></td></tr></table></figure>
+<h1 id="查看程序正在干什么">查看程序正在干什么</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cat profiler.sh</span><br><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment"># This script is from http://poormansprofiler.org/</span></span><br><span class="line">[shm@vir0077-community ~]$ cat profiler.sh </span><br><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line">nsamples=<span class="number">1</span></span><br><span class="line">sleeptime=<span class="number">0</span></span><br><span class="line">pid=$(pidof mysqld)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> $(seq <span class="number">1</span> <span class="variable">$nsamples</span>)</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    gdb -ex <span class="string">"set pagination 0"</span> -ex <span class="string">"thread apply all bt"</span> -batch -p <span class="variable">$pid</span></span><br><span class="line">    sleep <span class="variable">$sleeptime</span></span><br><span class="line">  <span class="keyword">done</span> | \</span><br><span class="line">awk <span class="string">'</span><br><span class="line">  BEGIN &#123; s = ""; &#125; </span><br><span class="line">  /^Thread/ &#123; print s; s = ""; &#125; </span><br><span class="line">  /^\#/ &#123; if (s != "" ) &#123; s = s "," $4&#125; else &#123; s = $4 &#125; &#125; </span><br><span class="line">  END &#123; print s &#125;'</span> | \</span><br><span class="line">sort | uniq -c | sort -r -n -k <span class="number">1</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h1 id="nginx_error_code_499">nginx error code 499</h1><h3 id="查看_499_定义">查看 499 定义</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/nginx/</span><br><span class="line">grep -r -A <span class="number">3</span> -B <span class="number">2</span> <span class="number">499</span> ./*</span><br><span class="line">./src/http/ngx_http_request.h:<span class="comment">#define NGX_HTTP_CLIENT_CLOSED_REQUEST     499</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看变量引用">查看变量引用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grep -r -A <span class="number">3</span> -B <span class="number">2</span>  NGX_HTTP_CLIENT_CLOSED_REQUEST ./*</span><br><span class="line">./src/http/ngx_http_spdy.c:    ngx_http_spdy_finalize_connection(sc,NGX_HTTP_CLIENT_CLOSED_REQUEST);</span><br><span class="line">./src/http/ngx_http_request.c:        || rc == NGX_HTTP_CLIENT_CLOSED_REQUEST</span><br><span class="line">./src/http/ngx_http_upstream.c:                     NGX_HTTP_CLIENT_CLOSED_REQUEST);</span><br><span class="line">./src/http/ngx_http_upstream.c:                     NGX_HTTP_CLIENT_CLOSED_REQUEST);</span><br></pre></td></tr></table></figure>
+<p>服务器 upstream 处理过慢，或客户端 http 超时设置短，超时后向服务端发送一个关闭TCP连接的包，Nginx检测到客户端关闭连接后，返回  499. 检查下 \$upstream_response_time, \$request_time 两个请求时间<br>修改下面 upstream 超时设置：</p>
+<pre><code><span class="title">fastcgi_connect_timeout</span>         <span class="number">300s</span>; 
+<span class="title">fastcgi_send_timeout</span>            <span class="number">300s</span>; 
+<span class="title">fastcgi_read_timeout</span>            <span class="number">300s</span>; 
+<span class="title">fastcgi_ignore_client_abort</span>     <span class="built_in">on</span>; 
+<span class="title">proxy_ignore_client_abort</span>       <span class="built_in">on</span>;
+</code></pre><p>另php-fpm 进程数不够和Content-Length field missed in http request 等都可能导致返回 499.</p>
+<p>Reference:<br>&ensp;[1] <a href="http://linux.die.net/man/1/strace" target="_blank" rel="external">http://linux.die.net/man/1/strace</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/work/">work</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/nginx/">nginx</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:imshm.tk">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/tech/">tech</a><small>8</small></li>
+  
+    <li><a href="/categories/work/">work</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/elk/" style="font-size: 10px;">elk</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hardware/" style="font-size: 10px;">hardware</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 15px;">iis</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wireless/" style="font-size: 10px;">wireless</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/11/04/ralink-wireless-driver-install-on-debian/">Debian 上安装 ralink 无线网卡驱动</a>
+      </li>
+    
+      <li>
+        <a href="/2015/11/04/nginx-access-failed-with-http-code-499/">Nginx 访问失败之 http_code 499</a>
+      </li>
+    
+      <li>
+        <a href="/2015/11/04/iis-website-hang-with-many-connections/">IIS 网站故障处理-大量连接</a>
+      </li>
+    
+      <li>
+        <a href="/2015/11/04/ELK-installation/">ELK 安装</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/29/hardware-monitor-for-linux/">Linux 硬件监控</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 shm
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+</body>
+</html>

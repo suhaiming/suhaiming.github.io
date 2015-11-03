@@ -53,6 +53,96 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-11-03T17:45:37.000Z"><a href="/2015/11/04/ralink-wireless-driver-install-on-debian/">2015-11-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/11/04/ralink-wireless-driver-install-on-debian/">Debian 上安装 ralink 无线网卡驱动</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="list_usb_devices">list usb devices</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@shm-debian8:/var/<span class="built_in">log</span><span class="comment"># lsusb</span></span><br><span class="line">Bus <span class="number">001</span> Device <span class="number">003</span>: ID <span class="number">148</span>f:<span class="number">5370</span> Ralink Technology, Corp. RT5370 Wireless Adapter</span><br><span class="line">Bus <span class="number">001</span> Device <span class="number">002</span>: ID <span class="number">80</span>ee:<span class="number">0021</span> VirtualBox USB Tablet</span><br><span class="line">Bus <span class="number">001</span> Device <span class="number">001</span>: ID <span class="number">1</span>d6b:<span class="number">0001</span> Linux Foundation <span class="number">1.1</span> root hub</span><br></pre></td></tr></table></figure>
+<h2 id="add_non-free_sources_[1]:">add non-free sources <sup>[1]</sup>:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">add non-free component to /etc/apt/sources.list</span><br><span class="line">deb http://http.debian.net/debian/ jessie main contrib non-free</span><br><span class="line"></span><br><span class="line">aptitude update &amp;&amp; aptitude install firmware-ralink</span><br><span class="line">modinfo rt2800usb | grep <span class="number">5370</span></span><br></pre></td></tr></table></figure>
+<h2 id="management_wireless_networking_devices">management wireless networking devices</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aptitude install rfkill </span><br><span class="line">rfkill list</span><br></pre></td></tr></table></figure>
+<h2 id="install_wireless_configure_tools">install wireless configure tools</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aptitude install iw </span><br><span class="line"><span class="comment"># iw - 当前的 nl80211 标准，不是所有的芯片都支持。</span></span><br><span class="line"><span class="comment"># wireless_tools - 已经过时，但是依然广泛使用。</span></span><br><span class="line"><span class="comment"># wpa_supplicant - 提供 WPA/WPA2 加密支持</span></span><br></pre></td></tr></table></figure>
+<h2 id="error_handling_[2]">error handling <sup>[2]</sup></h2><p>Most likely, you are trying to use the wrong driver. Issue the following command:</p>
+<pre><code>modinfo rt2800usb <span class="string">| grep 5370</span>
+</code></pre><p>and see whether the output is:</p>
+<pre><code>alias:          usb:v148Fp5370d<span class="keyword">*</span>dc<span class="keyword">*</span>dsc<span class="keyword">*</span>dp<span class="keyword">*</span>ic<span class="keyword">*</span>isc<span class="keyword">*</span>ip<span class="keyword">*</span>in<span class="keyword">*</span>
+</code></pre><p>or something very similar, containing the the string “v148Fp5370”<br>If this is so, then you are using the wrong driver. Try instead<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install linux-firmware-nonfree</span><br><span class="line">sudo rmmod rt5572sta</span><br><span class="line">sudo modprobe rt2800usb</span><br></pre></td></tr></table></figure></p>
+<p>and see whether this works now.</p>
+<p>Reference:<br>&ensp;&ensp;[1] <a href="http://nginxlibrary.com/hotlink-protection/" target="_blank" rel="external">http://nginxlibrary.com/hotlink-protection/</a><br>&ensp;&ensp;[2] <a href="http://cafe.elharo.com/privacy/privacy-tip-3-block-referer-headers-in-firefox/" target="_blank" rel="external">http://cafe.elharo.com/privacy/privacy-tip-3-block-referer-headers-in-firefox/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-03T17:40:47.000Z"><a href="/2015/11/04/nginx-access-failed-with-http-code-499/">2015-11-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/11/04/nginx-access-failed-with-http-code-499/">Nginx 访问失败之 http_code 499</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="检查日志">检查日志</h2><pre><code>查看访问日志
+查看错误日志
+查看后端服务器日志，如 php 等
+</code></pre><h2 id="strace_跟踪系统调用">strace 跟踪系统调用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追踪进程</span></span><br><span class="line">➜  ~  pidof nginx</span><br><span class="line"><span class="number">955</span> <span class="number">954</span> <span class="number">953</span> <span class="number">952</span> <span class="number">951</span></span><br><span class="line">sudo strace -Ttt <span class="operator">-e</span> trace=all -p <span class="number">951</span>,<span class="number">952</span>,<span class="number">953</span>,<span class="number">954</span>,<span class="number">955</span></span><br><span class="line"><span class="comment"># or modify .bashrc add brew function</span></span><br><span class="line"><span class="keyword">function</span> straceall &#123;</span><br><span class="line">    strace $(pidof <span class="string">"<span class="variable">$1</span>"</span>|sed -r <span class="string">'s/([0-9]*)/-p \1/g'</span>)</span><br><span class="line">&#125;</span><br><span class="line">sources .bashrc</span><br><span class="line">straceall nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># trace WEB</span></span><br><span class="line">strace <span class="operator">-f</span> -F <span class="operator">-s</span> <span class="number">1024</span> -o nginx-strace /usr/<span class="built_in">local</span>/nginx/sbin/nginx -c /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line">strace <span class="operator">-f</span> -F -o php-fpm-strace /usr/<span class="built_in">local</span>/php/sbin/php-fpm -y /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># trace Mysql</span></span><br><span class="line">strace <span class="operator">-f</span> -F -ff -o mysqld-strace <span class="operator">-s</span> <span class="number">1024</span> -p mysql_pid</span><br><span class="line">find ./ -name <span class="string">"mysqld-strace*"</span> -type f -print |xargs grep -n <span class="string">"SELECT.*FROM"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># trace PHP</span></span><br><span class="line">➜  ~  cat test.php </span><br><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$val</span> = <span class="built_in">exec</span>(<span class="string">"curl -I www.facebook.com"</span>,<span class="variable">$out</span>,<span class="variable">$status</span>);</span><br><span class="line"><span class="comment"># print_r($out);</span></span><br><span class="line">// <span class="built_in">print</span>_r(<span class="variable">$status</span>);</span><br><span class="line">?&gt;</span><br><span class="line">➜  ~  strace php test.php</span><br></pre></td></tr></table></figure>
+<h1 id="查看程序正在干什么">查看程序正在干什么</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cat profiler.sh</span><br><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment"># This script is from http://poormansprofiler.org/</span></span><br><span class="line">[shm@vir0077-community ~]$ cat profiler.sh </span><br><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line">nsamples=<span class="number">1</span></span><br><span class="line">sleeptime=<span class="number">0</span></span><br><span class="line">pid=$(pidof mysqld)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> $(seq <span class="number">1</span> <span class="variable">$nsamples</span>)</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    gdb -ex <span class="string">"set pagination 0"</span> -ex <span class="string">"thread apply all bt"</span> -batch -p <span class="variable">$pid</span></span><br><span class="line">    sleep <span class="variable">$sleeptime</span></span><br><span class="line">  <span class="keyword">done</span> | \</span><br><span class="line">awk <span class="string">'</span><br><span class="line">  BEGIN &#123; s = ""; &#125; </span><br><span class="line">  /^Thread/ &#123; print s; s = ""; &#125; </span><br><span class="line">  /^\#/ &#123; if (s != "" ) &#123; s = s "," $4&#125; else &#123; s = $4 &#125; &#125; </span><br><span class="line">  END &#123; print s &#125;'</span> | \</span><br><span class="line">sort | uniq -c | sort -r -n -k <span class="number">1</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h1 id="nginx_error_code_499">nginx error code 499</h1><h3 id="查看_499_定义">查看 499 定义</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/nginx/</span><br><span class="line">grep -r -A <span class="number">3</span> -B <span class="number">2</span> <span class="number">499</span> ./*</span><br><span class="line">./src/http/ngx_http_request.h:<span class="comment">#define NGX_HTTP_CLIENT_CLOSED_REQUEST     499</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看变量引用">查看变量引用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grep -r -A <span class="number">3</span> -B <span class="number">2</span>  NGX_HTTP_CLIENT_CLOSED_REQUEST ./*</span><br><span class="line">./src/http/ngx_http_spdy.c:    ngx_http_spdy_finalize_connection(sc,NGX_HTTP_CLIENT_CLOSED_REQUEST);</span><br><span class="line">./src/http/ngx_http_request.c:        || rc == NGX_HTTP_CLIENT_CLOSED_REQUEST</span><br><span class="line">./src/http/ngx_http_upstream.c:                     NGX_HTTP_CLIENT_CLOSED_REQUEST);</span><br><span class="line">./src/http/ngx_http_upstream.c:                     NGX_HTTP_CLIENT_CLOSED_REQUEST);</span><br></pre></td></tr></table></figure>
+<p>服务器 upstream 处理过慢，或客户端 http 超时设置短，超时后向服务端发送一个关闭TCP连接的包，Nginx检测到客户端关闭连接后，返回  499. 检查下 \$upstream_response_time, \$request_time 两个请求时间<br>修改下面 upstream 超时设置：</p>
+<pre><code><span class="title">fastcgi_connect_timeout</span>         <span class="number">300s</span>; 
+<span class="title">fastcgi_send_timeout</span>            <span class="number">300s</span>; 
+<span class="title">fastcgi_read_timeout</span>            <span class="number">300s</span>; 
+<span class="title">fastcgi_ignore_client_abort</span>     <span class="built_in">on</span>; 
+<span class="title">proxy_ignore_client_abort</span>       <span class="built_in">on</span>;
+</code></pre><p>另php-fpm 进程数不够和Content-Length field missed in http request 等都可能导致返回 499.</p>
+<p>Reference:<br>&ensp;[1] <a href="http://linux.die.net/man/1/strace" target="_blank" rel="external">http://linux.die.net/man/1/strace</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-11-03T17:21:55.000Z"><a href="/2015/11/04/iis-website-hang-with-many-connections/">2015-11-04</a></time>
       
       
@@ -123,11 +213,11 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-11-03T16:42:50.000Z"><a href="/2015/11/04/analysis-logs-with-EJK/">2015-11-04</a></time>
+        <time datetime="2015-11-03T16:42:50.000Z"><a href="/2015/11/04/ELK-installation/">2015-11-04</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/11/04/analysis-logs-with-EJK/">EJK 日志分析</a></h1>
+    <h1 class="title"><a href="/2015/11/04/ELK-installation/">ELK 安装</a></h1>
   
 
     </header>
@@ -465,73 +555,11 @@ git clone <span class="symbol">ssh:</span>/<span class="regexp">/git@45.78.3.30:
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-09-22T18:46:55.000Z"><a href="/2015/09/23/another-hexo-blog/">2015-09-23</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/09/23/another-hexo-blog/">基于 hexo 博客安装配置</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Reference: <a href="https://hexo.io/docs/" target="_blank" rel="external">hexo</a> <a href="https://github.com/creationix/nvm" target="_blank" rel="external">nvm</a></p>
-<h2 id="requirememnts">requirememnts</h2><h3 id="git">git</h3><p><strong>git installation</strong></p>
-<pre><code>aptitude <span class="keyword">install</span> git
-</code></pre><h3 id="node-js">node.js</h3><p><strong>nvm installation</strong><br> nvm: node version management</p>
-<pre><code>curl http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span>
-</code></pre><p><strong>nvm configuration</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat .zshrc</span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"/home/shm/.nvm"</span></span><br><span class="line">[ <span class="operator">-s</span> <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span>  <span class="comment"># This loads nvm</span></span><br><span class="line"></span><br><span class="line">nvm use <span class="number">4.1</span>.<span class="number">0</span> &gt; /dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>nvm commands</strong></p>
-<pre><code>nvm <span class="built_in">list</span>
-nvm install v4<span class="number">.10</span> <span class="comment">//nvm install stable/unstable</span>
-nvm use <span class="number">4.10</span> <span class="comment">//nvm use stable/unstable</span>
-nvm current
-</code></pre><h2 id="hexo_install">hexo install</h2><pre><code>npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo-cli</span>
-</code></pre><h2 id="hexo_setup">hexo setup</h2><pre><code>hexo init <span class="tag">&lt;<span class="title">folder</span>&gt;</span>
-cd  <span class="tag">&lt;<span class="title">folder</span>&gt;</span>
-npm install
-</code></pre><h2 id="hexo_configuration">hexo configuration</h2><p><strong>_config.yml</strong> avaliable config:</p>
-<ul>
-<li>site</li>
-<li>url</li>
-<li>directory</li>
-<li>writing</li>
-<li>catagory &amp; tag</li>
-<li>date / time format</li>
-<li>pagination</li>
-<li>extensions</li>
-</ul>
-<h2 id="hexo_commands">hexo commands</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">➜  hexo  hexo -h </span><br><span class="line">Usage: hexo &lt;<span class="built_in">command</span>&gt;</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  clean     Removed generated files and cache.</span><br><span class="line">  config    Get or <span class="built_in">set</span> configurations.</span><br><span class="line">  deploy    Deploy your website.</span><br><span class="line">  generate  Generate static files.</span><br><span class="line">  <span class="built_in">help</span>      Get <span class="built_in">help</span> on a command.</span><br><span class="line">  init      Create a new Hexo folder.</span><br><span class="line">  list      List the information of the site</span><br><span class="line">  migrate   Migrate your site from other system to Hexo.</span><br><span class="line">  new       Create a new post.</span><br><span class="line">  publish   Moves a draft post from _drafts to _posts folder.</span><br><span class="line">  render    Render files with renderer plugins.</span><br><span class="line">  server    Start the server.</span><br><span class="line">  version   Display version information.</span><br><span class="line"></span><br><span class="line">Global Options:</span><br><span class="line">  --config  Specify config file instead of using _config.yml</span><br><span class="line">  --cwd     Specify the CWD</span><br><span class="line">  --debug   Display all verbose messages <span class="keyword">in</span> the terminal</span><br><span class="line">  --draft   Display draft posts</span><br><span class="line">  --safe    Disable all plugins and scripts</span><br><span class="line">  --silent  Hide output on console</span><br><span class="line"></span><br><span class="line">For more <span class="built_in">help</span>, you can use <span class="string">'hexo help [command]'</span> <span class="keyword">for</span> the detailed information</span><br><span class="line">or you can check the docs: http://hexo.io/docs/</span><br></pre></td></tr></table></figure>
-<h2 id="hexo_deploy">hexo deploy</h2><pre><code>npm <span class="operator"><span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span>
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat _config.yml</span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: git@github.com:suhaiming/suhaiming.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<h2 id="hexo_themes_configuration">hexo themes configuration</h2><pre><code>git clone git<span class="annotation">@github</span>.<span class="string">com:</span>iissnan<span class="regexp">/hexo-theme-next.git themes/</span>next
-git clone <span class="string">git:</span><span class="comment">//github.com/tommy351/hexo-theme-light.git theme/light </span>
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat _config.yml</span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
+  
+    <a href="/page/2/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
@@ -550,7 +578,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
   
     <li><a href="/categories/tech/">tech</a><small>8</small></li>
   
-    <li><a href="/categories/work/">work</a><small>1</small></li>
+    <li><a href="/categories/work/">work</a><small>3</small></li>
   
   </ul>
 </div>
@@ -560,7 +588,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tagcloud">
   <h3 class="title">Tag Cloud</h3>
   <div class="entry">
-    <a href="/tags/ejk/" style="font-size: 10px;">ejk</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hardware/" style="font-size: 10px;">hardware</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 20px;">iis</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    <a href="/tags/elk/" style="font-size: 10px;">elk</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hardware/" style="font-size: 10px;">hardware</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 15px;">iis</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/wireless/" style="font-size: 10px;">wireless</a>
   </div>
 </div>
 
@@ -571,23 +599,23 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
   <ul class="entry">
     
       <li>
+        <a href="/2015/11/04/ralink-wireless-driver-install-on-debian/">Debian 上安装 ralink 无线网卡驱动</a>
+      </li>
+    
+      <li>
+        <a href="/2015/11/04/nginx-access-failed-with-http-code-499/">Nginx 访问失败之 http_code 499</a>
+      </li>
+    
+      <li>
         <a href="/2015/11/04/iis-website-hang-with-many-connections/">IIS 网站故障处理-大量连接</a>
       </li>
     
       <li>
-        <a href="/2015/11/04/analysis-logs-with-EJK/">EJK 日志分析</a>
+        <a href="/2015/11/04/ELK-installation/">ELK 安装</a>
       </li>
     
       <li>
         <a href="/2015/09/29/hardware-monitor-for-linux/">Linux 硬件监控</a>
-      </li>
-    
-      <li>
-        <a href="/2015/09/26/security-configuration-for-linux-root-user/">Root 安全配置</a>
-      </li>
-    
-      <li>
-        <a href="/2015/09/26/hotlink-protection-in-nginx/">Nginx 防盗链设置</a>
       </li>
     
   </ul>
