@@ -53,6 +53,48 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-11-03T16:42:50.000Z"><a href="/2015/11/04/analysis-logs-with-EJK/">2015-11-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/11/04/analysis-logs-with-EJK/">analysis logs with EJK</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="Java_install">Java install</h2><p>download java:<br><a href="http://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/server-jre8-downloads-2133154.html</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@debian-elk:~<span class="comment"># tar -xzvf server-jre-8u60-linux-x64.gz -C /usr/local/</span></span><br><span class="line">root@debian-elk:~<span class="comment"># ln -s jdk1.8.0_60 java</span></span><br><span class="line"></span><br><span class="line">root@debian-elk:~<span class="comment"># cat .bashrc</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java/</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span>CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/tools.jar:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$CLASSPATH</span></span><br><span class="line"></span><br><span class="line">root@debian-elk:~<span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">"1.8.0_60"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="download_link">download link</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Elasticsearch:</span><br><span class="line">https://www.elastic.co/downloads/elasticsearch</span><br><span class="line">https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-<span class="number">1.7</span>.<span class="number">2</span>.tar.gz</span><br><span class="line"></span><br><span class="line">logstash:</span><br><span class="line">https://www.elastic.co/downloads/logstash</span><br><span class="line">https://download.elastic.co/logstash/logstash/logstash-<span class="number">1.5</span>.<span class="number">4</span>.tar.gz</span><br><span class="line"></span><br><span class="line">kibana:</span><br><span class="line">https://www.elastic.co/products/kibana</span><br><span class="line">https://download.elastic.co/kibana/kibana/kibana-<span class="number">4.1</span>.<span class="number">2</span>-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="install">install</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf elasticsearch-<span class="number">1.7</span>.<span class="number">2</span>.tar.gz</span><br><span class="line">tar -xzvf logstash-<span class="number">1.5</span>.<span class="number">4</span>.tar.gz</span><br><span class="line">tar -xzvf kibana-<span class="number">4.1</span>.<span class="number">2</span>-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line">root@debian-elk:/usr/<span class="built_in">local</span><span class="comment"># ln -s elasticsearch-1.7.2 elasticsearch</span></span><br><span class="line">root@debian-elk:/usr/<span class="built_in">local</span><span class="comment"># ln -s logstash-1.5.4 logstash</span></span><br><span class="line">root@debian-elk:/usr/<span class="built_in">local</span><span class="comment"># ln -s kibana-4.1.2-linux-x64 kibana</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/kibana/bin/:/usr/<span class="built_in">local</span>/elasticsearch/bin:/usr/<span class="built_in">local</span>/logstash/bin</span><br></pre></td></tr></table></figure>
+<h2 id="install_elasticsearch-kopf_plugin">install elasticsearch-kopf plugin</h2><p>Elasticsearch-kopf plugin can query data from  Elasticsearch<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd /usr/local/elasticsearch-1.6.0/</span></span><br><span class="line"><span class="comment"># ./plugin -install lmenezes/elasticsearch-kopf</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="test">test</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@debian-elk:/usr/<span class="built_in">local</span>/logstash<span class="comment"># logstash agent -e 'input &#123; stdin &#123; &#125; &#125; output &#123; stdout &#123;&#125; &#125;'</span></span><br><span class="line">Logstash startup completed</span><br><span class="line">hello</span><br><span class="line"><span class="number">2015</span>-<span class="number">09</span>-<span class="number">30</span>T03:<span class="number">28</span>:<span class="number">40.221</span>Z debian-elk hello</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@debian-elk:/usr/<span class="built_in">local</span>/logstash<span class="comment"># cat etc/elastic.conf </span></span><br><span class="line">input &#123;</span><br><span class="line">  file &#123;</span><br><span class="line">    path =&gt; <span class="string">"/var/log/syslog"</span></span><br><span class="line">    <span class="built_in">type</span> =&gt; <span class="string">"syslog"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">   elasticsearch &#123;host =&gt; <span class="string">"localhost"</span> &#125;</span><br><span class="line">   stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">root@debian-elk:/usr/<span class="built_in">local</span>/logstash<span class="comment"># cat etc/elastic.conf </span></span><br><span class="line">input &#123; stdin &#123; &#125; &#125;</span><br><span class="line">output &#123;</span><br><span class="line">   elasticsearch &#123;host =&gt; <span class="string">"localhost"</span> &#125;</span><br><span class="line">   stdout &#123; codec=&gt; rubydebug &#125;</span><br><span class="line">&#125;</span><br><span class="line">root@debian-elk:/usr/<span class="built_in">local</span>/logstash<span class="comment"># ./bin/logstash agent -f ./etc/elastic.conf</span></span><br><span class="line">root@debian-elk:/usr/<span class="built_in">local</span>/logstash<span class="comment"># curl 'http://localhost:9200/_search?pretty'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"took"</span> : <span class="number">651</span>,</span><br><span class="line">  <span class="string">"timed_out"</span> : <span class="literal">false</span>,</span><br><span class="line">  <span class="string">"_shards"</span> : &#123;</span><br><span class="line">    <span class="string">"total"</span> : <span class="number">5</span>,</span><br><span class="line">    <span class="string">"successful"</span> : <span class="number">5</span>,</span><br><span class="line">    <span class="string">"failed"</span> : <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"hits"</span> : &#123;</span><br><span class="line">    <span class="string">"total"</span> : <span class="number">1</span>,</span><br><span class="line">    <span class="string">"max_score"</span> : <span class="number">1.0</span>,</span><br><span class="line">    <span class="string">"hits"</span> : [ &#123;</span><br><span class="line">      <span class="string">"_index"</span> : <span class="string">"logstash-2015.09.30"</span>,</span><br><span class="line">      <span class="string">"_type"</span> : <span class="string">"logs"</span>,</span><br><span class="line">      <span class="string">"_id"</span> : <span class="string">"AVAcWZqr9xLZPRV4-42K"</span>,</span><br><span class="line">      <span class="string">"_score"</span> : <span class="number">1.0</span>,</span><br><span class="line">      <span class="string">"_source"</span>:&#123;<span class="string">"message"</span>:<span class="string">"hello logstash"</span>,<span class="string">"@version"</span>:<span class="string">"1"</span>,<span class="string">"@timestamp"</span>:<span class="string">"2015-09-30T03:44:02.159Z"</span>,<span class="string">"host"</span>:<span class="string">"debian-elk"</span>&#125;</span><br><span class="line">    &#125; ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Official_install">Official install</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># elasticsearch</span></span><br><span class="line">Run bin/elasticsearch on Unix or bin/elasticsearch.bat on Windows</span><br><span class="line">Run curl -X GET http://localhost:<span class="number">9200</span>/</span><br><span class="line"><span class="comment"># logstash</span></span><br><span class="line">Prepare a logstash.conf config file</span><br><span class="line">Run bin/logstash agent <span class="operator">-f</span> logstash.conf</span><br><span class="line"><span class="comment"># kbana</span></span><br><span class="line">Extract your archive </span><br><span class="line">Open config/kibana.yml <span class="keyword">in</span> an editor </span><br><span class="line">Set the elasticsearch.url to point at your Elasticsearch instance </span><br><span class="line">Run ./bin/kibana (or bin\kibana.bat on windows)</span><br></pre></td></tr></table></figure>
+<h2 id="error_handling">error handling</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># error</span></span><br><span class="line">root@debian-elk:/usr/<span class="built_in">local</span>/logstash<span class="comment"># ./bin/logstash -f ./etc/elastic.conf </span></span><br><span class="line">NotImplementedError: block device detection unsupported or native support failed to load</span><br><span class="line"><span class="comment"># solution</span></span><br><span class="line">ln <span class="operator">-s</span> /lib/x86_64-linux-gnu/libcrypt.so.<span class="number">1</span> /usr/lib/x86_64-linux-gnu/libcrypt.so</span><br><span class="line"></span><br><span class="line">Fix <span class="keyword">in</span> [<span class="comment">#3127](https://github.com/elastic/logstash/issues/3127#issuecomment-101068714)</span></span><br></pre></td></tr></table></figure>
+<p>Reference:<br>&ensp;&ensp;[1] <a href="https://www.elastic.co/guide/index.html" target="_blank" rel="external">https://www.elastic.co/guide/index.html</a><br>&ensp;&ensp;[3] <a href="https://www.elastic.co/videos" target="_blank" rel="external">https://www.elastic.co/videos</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-09-29T00:34:07.000Z"><a href="/2015/09/29/hardware-monitor-for-linux/">2015-09-29</a></time>
       
       
@@ -436,7 +478,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/tech/">tech</a><small>6</small></li>
+    <li><a href="/categories/tech/">tech</a><small>7</small></li>
   
     <li><a href="/categories/work/">work</a><small>1</small></li>
   
@@ -448,7 +490,7 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tagcloud">
   <h3 class="title">Tag Cloud</h3>
   <div class="entry">
-    <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hardware/" style="font-size: 10px;">hardware</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 10px;">iis</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+    <a href="/tags/ejk/" style="font-size: 10px;">ejk</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hardware/" style="font-size: 10px;">hardware</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iis/" style="font-size: 10px;">iis</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/log-parser/" style="font-size: 10px;">log parser</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
   </div>
 </div>
 
@@ -457,6 +499,10 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2015/11/04/analysis-logs-with-EJK/">analysis logs with EJK</a>
+      </li>
     
       <li>
         <a href="/2015/09/29/hardware-monitor-for-linux/">Linux 硬件监控</a>
@@ -472,10 +518,6 @@ git clone <span class="string">git:</span><span class="comment">//github.com/tom
     
       <li>
         <a href="/2015/09/24/lookup-server-information-by-ip-address/">通过 IP 查找服务器</a>
-      </li>
-    
-      <li>
-        <a href="/2015/09/24/how-to-deal-with-server-fault/">服务器故障处理及日志分析</a>
       </li>
     
   </ul>
